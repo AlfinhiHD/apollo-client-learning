@@ -1,1 +1,66 @@
-<p>user-table works!</p>
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="no">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.no }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"
+        >{{ user.civility }} {{ user.last_name }}
+        {{ user.first_name }}</mat-cell
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="sex">
+        <mat-header-cell *matHeaderCellDef>Sex</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.sex }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.status }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef>Position</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.position }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="count_document">
+        <mat-header-cell *matHeaderCellDef>Count Document</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.count_document }}</mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<div class="search-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Last Name</mat-label>
+    <input matInput (keyup)="searchByLastName()" [(ngModel)]="searchInput" />
+    <button
+      mat-button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      *ngIf="searchInput"
+      (click)="searchInput = ''"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
